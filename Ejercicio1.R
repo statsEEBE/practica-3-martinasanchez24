@@ -1,3 +1,108 @@
+#estima que els drons són detectats 
+#a una taxa mitjana de 1.2 vegades per hora
+
+#1 calcula la prob de que exactamente 2 drons 
+#activin el radar en una hora determinada
+lambda <- 1.2
+dpois(2, lambda)
+
+#2 calcula la prob que el radar s'activi almenys 
+#una vegada en un periode de dues hores --> lambda *2
+#P(X>=1)=1-P(X<1)
+lambda <- lambda*2
+lambda
+1-ppois(0, lambda)
+
+#3 el període s'esten a 3 hores, X representa el nombre de detecciones
+#valor esperat = lambda
+#var = lambda
+lambda <- 1.2
+valor_Esperado <- lambda*3
+valor_Esperado
+varianza <- lambda*3
+varianza
+
+#4
+lambda_2 <- 1.5
+rpois(10000, lambda_2)
+set.seed(789)
+mean(rpois(10000, lambda_2))
+
+
+lambda_2 <- 1.5
+set.seed(789)
+mean(rpois(10000, lambda_2))
+
+#5 calcula el nombre minims de radars per a que la prob que no hi hagi 
+#deteccions en una hora sigui menor a 0.01 assumint que la mitja es de 0.3
+p <- 0.01
+lambda <- 0.3
+(-log(p) / lambda)
+#---------------------------------------------------------------
+# els pesos de caniches es distribueixen de forma normal amb 
+media <- 7.4
+sd <- 1.42
+#1 seleccioneu un grafic: 
+x <- seq(0,18, by=0.4)
+densidad <- dnorm(x,media,sd)
+plot(x, densidad, type = "l", col = "red", lwd=2)
+
+#2 P(X>6.6)
+1-pnorm(6.6, media, sd)
+
+#3 prob de que pese més de 5.6 però menys de 8.4
+pnorm(8.4,media,sd)-pnorm(5.6,media,sd)
+#F(B)-F(A)
+
+#4 percentil 0.94
+qnorm(0.94,media,sd)
+
+#5 un grup de 10 caniches alatzar, prob que el pes total sigui menus que 70P(X<70)
+n <- 10
+k <- 70
+media_total <- n*media
+sd_total <- sqrt(n)*sd
+pnorm(k,media_total,sd_total)
+
+#---------------------------------------------------
+#3
+mu <- 897
+
+#valor esperado de la suma
+n <- 49
+n*mu
+
+#varinza de la media
+mu <- 897
+n <- 49
+prob <- 0.983
+x <- 919
+
+z <- qnorm(prob)
+sigma <- (x - mu) * sqrt(n) / z
+sigma
+varianza <- (sigma^2) / n;varianza
+
+#prob de la suma dels continuguts no sigui menor 44169
+sum_crit <- 44169
+mean <- n * mu
+std<- sigma * sqrt(n)
+prob <- 1 - pnorm(44168, mean = mean, sd = std);prob
+
+#mida minima de la muestra per a obtenir una prob
+#de menos del 3.4% que la media no pase los 878 
+prob <- 0.034
+x <- 878
+z_tg <- qnorm(prob)
+n_min <-((sigma * z_tg / (mu - x))^2);n_min
+
+#
+n_nueva <- 25
+nueva_tg <- 977
+prob_tg <- 0.10
+z.2 <- qnorm(prob_tg, lower.tail = FALSE)
+crecimiento.2 <- (nueva_tg - mu) + z.2* (sigma / sqrt(n_nueva));crecimiento.2
+#-------------------------------------------------------------------------------------------------------------------------------
 # SOlucion Ejercicio
 
 x1 = 0:5   # Posibles resultados
